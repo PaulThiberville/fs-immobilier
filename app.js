@@ -3,6 +3,11 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
 
+//Routes
+const userRoutes = require("./routes/user");
+const productRoutes = require("./routes/product");
+const imageRoutes = require("./routes/image");
+
 const app = express();
 
 dotenv.config();
@@ -17,10 +22,12 @@ mongoose
 
 app.use(express.json());
 
+// enable CORS
 app.use(cors());
 
-app.use("/", (req, res) => {
-  res.send("Hello World!");
-});
+//API routes
+app.use("/user", userRoutes);
+app.use("/product", productRoutes);
+app.use("/image", imageRoutes);
 
 module.exports = app;
