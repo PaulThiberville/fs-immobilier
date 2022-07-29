@@ -18,7 +18,9 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => console.log("Database Connexion : Success"))
-  .catch(() => console.log("Database Connexion : Failed"));
+  .catch(() =>
+    console.log("Database Connexion : Failed", process.env.DB_CONNEXION_STRING)
+  );
 
 app.use(express.json());
 
