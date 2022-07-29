@@ -13,7 +13,7 @@ module.exports = (req, res, next) => {
     if (!decodedToken) return res.status(401).json({ error: "Invalid token" });
     const userId = decodedToken.userId;
     if (checkIfUserStilExist === false)
-      return res.status(401).json({ error: "User don't exist" });
+      return res.status(401).json({ error: "User not found" });
     req.auth = { userId };
     next();
   } catch (error) {
