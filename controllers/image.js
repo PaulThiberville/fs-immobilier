@@ -10,7 +10,7 @@ exports.add = async (req, res) => {
       const newImage = new Image({
         product: product._id,
         url: req.body[i].data.url,
-        deleteUrl: req.body[i].delete_url,
+        deleteUrl: req.body[i].data.delete_url,
       });
       await newImage.save();
       product.images = [...product.images, newImage._id];
