@@ -31,7 +31,6 @@ app.use(cors());
 app.use("/user", userRoutes);
 app.use("/product", productRoutes);
 app.use("/image", imageRoutes);
-app.use("/type", typeRoutes);
 app.use("/category", categoryRoutes);
 
 module.exports = app;
