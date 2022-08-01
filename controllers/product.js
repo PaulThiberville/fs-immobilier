@@ -14,6 +14,7 @@ exports.create = async (req, res) => {
       surface: req.body.surface,
       rooms: req.body.rooms,
       images: [],
+      createdAt: Date.now(),
     });
     await product.save();
     return res.status(201).json(product);
@@ -44,6 +45,8 @@ exports.update = async (req, res) => {
   try {
     const product = await Product.findOne({ _id: req.params.id });
     if (!product) return res.status(404).json({ error: "Product not found" });
+    product.type = req.body.type;
+    product.category = req.body.category;
     product.title = req.body.title;
     product.city = req.body.city;
     product.description = req.body.description;

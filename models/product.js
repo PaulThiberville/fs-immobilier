@@ -12,6 +12,7 @@ const productSchema = mongoose.Schema({
   images: [
     { type: mongoose.Schema.Types.ObjectId, ref: "Image", required: true },
   ],
+  createdAt: { type: Number, required: true },
 });
 
 module.exports = mongoose.model("Product", productSchema);
