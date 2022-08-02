@@ -15,6 +15,7 @@ exports.create = async (req, res) => {
       rooms: req.body.rooms,
       images: [],
       createdAt: Date.now(),
+      visibility: false,
     });
     await product.save();
     return res.status(201).json(product);
@@ -25,8 +26,11 @@ exports.create = async (req, res) => {
 
 exports.readAll = async (req, res) => {
   try {
-    const product = await Product.find({});
-    return res.status(200).json(product);
+    const products = await Product.find({});
+    for (let i = 0; i < products.length; i++) {
+      await products[i].populate({ path: "images" });
+    }
+    return res.status(200).json(products);
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
