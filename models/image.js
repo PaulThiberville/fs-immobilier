@@ -7,7 +7,6 @@ const imageSchema = mongoose.Schema({
     required: true,
   },
   url: { type: String, required: true },
-  medium_url: { type: String, required: true },
   thumb_url: { type: String, required: true },
   deleteUrl: { type: String, required: true },
 });
