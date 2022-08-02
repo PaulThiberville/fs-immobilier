@@ -34,6 +34,7 @@ exports.delete = async (req, res) => {
     });
     await product.save();
     await image.delete();
+    await product.populate({ path: "images" });
     return res.status(200).json(product);
   } catch (error) {
     return res.status(500).json({ error: error.message });
