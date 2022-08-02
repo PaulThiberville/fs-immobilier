@@ -26,17 +26,15 @@ exports.add = async (req, res) => {
 
 exports.delete = async (req, res) => {
   try {
-    for (let i = 0; i < req.body.length; i++) {
-      const image = await Image.findOne({ _id: req.body[i] });
-      if (!image) return res.status(404).json({ error: "Image not found" });
-      const product = await Product.findOne({ _id: image.product });
-      product.images = [...product.images].filter((id) => {
-        return id.toString() !== req.body[i];
-      });
-      await product.save();
-      await image.delete();
-    }
-    return res.status(200).json({ deleted: req.body });
+    const image = await Image.findOne({ _id: req.params.id });
+    if (!image) return res.status(404).json({ error: "Image not found" });
+    const product = await Product.findOne({ _id: image.product });
+    product.images = [...product.images].filter((id) => {
+      return id.toString() !== req.body[i];
+    });
+    await product.save();
+    await image.delete();
+    return res.status(200).json(product);
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
