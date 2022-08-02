@@ -30,7 +30,7 @@ exports.delete = async (req, res) => {
     if (!image) return res.status(404).json({ error: "Image not found" });
     const product = await Product.findOne({ _id: image.product });
     product.images = [...product.images].filter((id) => {
-      return id.toString() !== req.body[i];
+      return id.toString() !== req.params.id;
     });
     await product.save();
     await image.delete();
