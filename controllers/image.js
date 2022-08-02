@@ -17,6 +17,7 @@ exports.add = async (req, res) => {
       product.images = [...product.images, newImage._id];
     }
     await product.save();
+    await product.populate({ path: "images" });
     return res.status(201).json(product);
   } catch (error) {
     return res.status(500).json({ error: error.message });
