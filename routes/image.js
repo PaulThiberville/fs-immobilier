@@ -5,6 +5,6 @@ const auth = require("../middlewares/auth");
 const imageCtrl = require("../controllers/image");
 
 router.post("/:id", auth, imageCtrl.add);
-router.delete("/", auth, imageCtrl.delete);
+router.delete("/:id", auth, imageCtrl.delete);
 
 module.exports = router;
