@@ -36,6 +36,26 @@ exports.readAll = async (req, res) => {
   }
 };
 
+exports.search = async (req, res) => {
+  try {
+    const options = {};
+    if (req.body?.category) options.category = req.body.category;
+    if (req.body?.type) options.type = req.body.type;
+    if (req.body?.city) options.city = req.body.city;
+    if (req.body?.price) options.price = { $lte: req.body.price };
+    if (req.body?.surface) options.surface = { $gte: req.body.surface };
+    if (req.body?.rooms) options.rooms = { $gte: req.body.rooms };
+    if (req.body?.createdAt) options.createdAt = { $lte: req.body.createdAt };
+    const products = await Product.find(options);
+    for (let i = 0; i < products.length; i++) {
+      await products[i].populate({ path: "images" });
+    }
+    return res.status(200).json(products);
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
 exports.readOne = async (req, res) => {
   try {
     const product = await Product.findOne({ _id: req.params.id });

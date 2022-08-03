@@ -7,7 +7,7 @@ const cors = require("cors");
 const userRoutes = require("./routes/user");
 const productRoutes = require("./routes/product");
 const imageRoutes = require("./routes/image");
-const categoryRoutes = require("./routes/category");
+const typeRoutes = require("./routes/type");
 
 const app = express();
 
@@ -30,6 +30,6 @@ app.use(cors());
 app.use("/user", userRoutes);
 app.use("/product", productRoutes);
 app.use("/image", imageRoutes);
-app.use("/category", categoryRoutes);
+app.use("/type", typeRoutes);
 
 module.exports = app;

@@ -7,6 +7,7 @@ const productCtrl = require("../controllers/product");
 router.post("/", auth, productCtrl.create);
 router.get("/", productCtrl.readAll);
 router.get("/:id", productCtrl.readOne);
+router.post("/search/", productCtrl.search);
 router.put("/:id", auth, productCtrl.update);
 router.delete("/:id", auth, productCtrl.delete);
 
