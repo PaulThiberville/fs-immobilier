@@ -15,6 +15,7 @@ exports.register = async (req, res) => {
       token: jwt.sign({ userId: user._id }, process.env.TOKEN_SECRET, {
         expiresIn: "24h",
       }),
+      expiresAt: Date.now() + 24 * 60 * 60 * 1000,
     });
   } catch (error) {
     return res.status(500).json({ error: error.message });
@@ -31,6 +32,7 @@ exports.login = async (req, res) => {
         token: jwt.sign({ userId: user._id }, process.env.TOKEN_SECRET, {
           expiresIn: "24h",
         }),
+        expiresAt: Date.now() + 24 * 60 * 60 * 1000,
       });
     }
     return res.status(400).json({ error: "Invalid Password" });
