@@ -46,11 +46,17 @@ exports.search = async (req, res) => {
     if (req.body?.surface) options.surface = { $gte: req.body.surface };
     if (req.body?.rooms) options.rooms = { $gte: req.body.rooms };
     if (req.body?.createdAt) options.createdAt = { $lte: req.body.createdAt };
-    const products = await Product.find(options);
+
+    const count = await Product.count();
+
+    const products = await Product.find(options)
+      .sort({ createdAt: 1 })
+      .skip(req.body.offset)
+      .limit(req.body.limit);
     for (let i = 0; i < products.length; i++) {
       await products[i].populate({ path: "images" });
     }
-    return res.status(200).json(products);
+    return res.status(200).json({ products, count });
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }

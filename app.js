@@ -8,6 +8,7 @@ const userRoutes = require("./routes/user");
 const productRoutes = require("./routes/product");
 const imageRoutes = require("./routes/image");
 const typeRoutes = require("./routes/type");
+const citiesRoutes = require("./routes/cities");
 
 const app = express();
 
@@ -31,5 +32,6 @@ app.use("/user", userRoutes);
 app.use("/product", productRoutes);
 app.use("/image", imageRoutes);
 app.use("/type", typeRoutes);
+app.use("/cities", citiesRoutes);
 
 module.exports = app;
