@@ -3,6 +3,6 @@ const router = express.Router();
 
 const citiesCtrl = require("../controllers/cities");
 
-router.get("/", citiesCtrl.getCities);
+router.get("/:input", citiesCtrl.getCities);
 
 module.exports = router;
