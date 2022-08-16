@@ -2,7 +2,9 @@ const image = require("../models/image");
 const Image = require("../models/image");
 const Product = require("../models/product");
 
-//product controller
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 exports.create = async (req, res) => {
   try {
@@ -10,7 +12,7 @@ exports.create = async (req, res) => {
       type: req.body.type,
       category: req.body.category,
       title: req.body.title,
-      city: req.body.city.toUpperCase(),
+      city: capitalizeFirstLetter(req.body.city),
       description: req.body.description,
       price: req.body.price,
       surface: req.body.surface,
@@ -41,9 +43,11 @@ exports.readAll = async (req, res) => {
 exports.search = async (req, res) => {
   try {
     const options = {};
+
+    if (req.body?.id) options._id = req.body.id;
     if (req.body?.category) options.category = req.body.category;
     if (req.body?.type) options.type = req.body.type;
-    if (req.body?.city) options.city = req.body.city.toUpperCase();
+    if (req.body?.city) options.city = capitalizeFirstLetter(req.body.city);
     if (req.body?.price) options.price = { $lte: req.body.price };
     if (req.body?.surface) options.surface = { $gte: req.body.surface };
     if (req.body?.rooms) options.rooms = { $gte: req.body.rooms };
