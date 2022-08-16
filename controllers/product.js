@@ -2,6 +2,8 @@ const image = require("../models/image");
 const Image = require("../models/image");
 const Product = require("../models/product");
 
+//product controller
+
 exports.create = async (req, res) => {
   try {
     const product = new Product({
