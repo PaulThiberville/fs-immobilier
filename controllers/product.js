@@ -8,7 +8,7 @@ exports.create = async (req, res) => {
       type: req.body.type,
       category: req.body.category,
       title: req.body.title,
-      city: req.body.city,
+      city: req.body.city.toUpperCase(),
       description: req.body.description,
       price: req.body.price,
       surface: req.body.surface,
@@ -41,14 +41,13 @@ exports.search = async (req, res) => {
     const options = {};
     if (req.body?.category) options.category = req.body.category;
     if (req.body?.type) options.type = req.body.type;
-    if (req.body?.city) options.city = req.body.city;
+    if (req.body?.city) options.city = req.body.city.toUpperCase();
     if (req.body?.price) options.price = { $lte: req.body.price };
     if (req.body?.surface) options.surface = { $gte: req.body.surface };
     if (req.body?.rooms) options.rooms = { $gte: req.body.rooms };
     if (req.body?.createdAt) options.createdAt = { $lte: req.body.createdAt };
 
-    const count = await Product.count();
-
+    const count = await Product.find(options).count();
     const products = await Product.find(options)
       .sort({ createdAt: 1 })
       .skip(req.body.offset)
