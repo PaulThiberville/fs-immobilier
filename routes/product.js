@@ -4,8 +4,7 @@ const router = express.Router();
 const auth = require("../middlewares/auth");
 const productCtrl = require("../controllers/product");
 
-router.post("/", auth, productCtrl.create);
-router.get("/", productCtrl.readAll);
+router.post("/", productCtrl.create);
 router.get("/:id", productCtrl.readOne);
 router.post("/search/", productCtrl.search);
 router.put("/:id", auth, productCtrl.update);
